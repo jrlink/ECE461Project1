@@ -1,0 +1,390 @@
+******************************************************************************
+                  TI ARM Linker PC v5.2.6                      
+******************************************************************************
+>> Linked Mon Feb 15 23:47:58 2016
+
+OUTPUT FILE NAME:   <FlashAlt.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 0000240d
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  MAIN                  00000000   00040000  000026a6  0003d95a  R  X
+  INFO                  00200000   00004000  00000000  00004000  R  X
+  SRAM_CODE             01000000   00010000  00000000  00010000  RW X
+  SRAM_DATA             20000000   00010000  00000344  0000fcbc  RW  
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    000026a8   000026a8    r-x
+  00000000    00000000    00000140   00000140    r-- .intvecs
+  00000140    00000140    0000244e   0000244e    r-x .text
+  00002590    00002590    00000098   00000098    r-- .const
+  00002628    00002628    00000080   00000080    r-- .cinit
+20000000    20000000    00000144   00000000    rw-
+  20000000    20000000    000000e4   00000000    rw- .vtable
+  200000e4    200000e4    00000060   00000000    rw- .data
+2000fe00    2000fe00    00000200   00000000    rw-
+  2000fe00    2000fe00    00000200   00000000    rw- .stack
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.intvecs   0    00000000    00000140     
+                  00000000    00000140     startup_msp432p401r_ccs.obj (.intvecs:retain)
+
+.text      0    00000140    0000244e     
+                  00000140    000015a8     flash.obj (.text)
+                  000016e8    000003f0     interrupt.obj (.text)
+                  00001ad8    00000348     system_msp432p401r.obj (.text)
+                  00001e20    00000244     sysctl.obj (.text)
+                  00002064    000001b8     main.obj (.text)
+                  0000221c    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.obj (.text)
+                  000022b8    0000007a                                   : memset_t2.obj (.text)
+                  00002332    00000002     --HOLE-- [fill = 0]
+                  00002334    0000006c                                   : autoinit.obj (.text)
+                  000023a0    0000006a                                   : copy_decompress_rle.obj (.text)
+                  0000240a    00000002     --HOLE-- [fill = 0]
+                  0000240c    00000050                                   : boot.obj (.text)
+                  0000245c    0000004c                                   : cpy_tbl.obj (.text)
+                  000024a8    00000044                                   : exit.obj (.text)
+                  000024ec    0000003e     cpu.obj (.text)
+                  0000252a    00000002     --HOLE-- [fill = 0]
+                  0000252c    00000018     rtsv7M4_T_le_v4SPD16_eabi.lib : args_main.obj (.text)
+                  00002544    00000014                                   : _lock.obj (.text)
+                  00002558    00000012     startup_msp432p401r_ccs.obj (.text)
+                  0000256a    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.obj (.text:decompress:none)
+                  00002578    0000000c                                   : copy_zero_init.obj (.text:decompress:ZI)
+                  00002584    00000006                                   : copy_decompress_rle.obj (.text:decompress:rle24)
+                  0000258a    00000004                                   : pre_init.obj (.text)
+
+.const     0    00002590    00000098     
+                  00002590    00000050     interrupt.obj (.const:g_pulRegs)
+                  000025e0    00000040     interrupt.obj (.const)
+                  00002620    00000008     flash.obj (.const)
+
+.cinit     0    00002628    00000080     
+                  00002628    00000059     (.cinit..data.load) [load image, compression = rle]
+                  00002681    00000003     --HOLE-- [fill = 0]
+                  00002684    0000000c     (__TI_handler_table)
+                  00002690    00000008     (.cinit..vtable.load) [load image, compression = zero_init]
+                  00002698    00000010     (__TI_cinit_table)
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+.vtable    0    20000000    000000e4     UNINITIALIZED
+                  20000000    000000e4     interrupt.obj (.vtable)
+
+.data      0    200000e4    00000060     UNINITIALIZED
+                  200000e4    00000040     flash.obj (.data:__getBurstProgramRegs)
+                  20000124    00000008     main.obj (.data)
+                  2000012c    00000008     rtsv7M4_T_le_v4SPD16_eabi.lib : _lock.obj (.data)
+                  20000134    00000008                                   : exit.obj (.data)
+                  2000013c    00000004                                   : stkdepth_vars.obj (.data)
+                  20000140    00000004     system_msp432p401r.obj (.data)
+
+.TI.persistent 
+*          0    200000e4    00000000     UNINITIALIZED
+
+.stack     0    2000fe00    00000200     UNINITIALIZED
+                  2000fe00    00000200     --HOLE--
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 00002698 records: 2, size/record: 8, table size: 16
+	.data: load addr=00002628, load size=00000059 bytes, run addr=200000e4, run size=00000060 bytes, compression=rle
+	.vtable: load addr=00002690, load size=00000008 bytes, run addr=20000000, run size=000000e4 bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 00002684 records: 3, size/record: 4, table size: 12
+	index: 0, handler: __TI_zero_init
+	index: 1, handler: __TI_decompress_rle24
+	index: 2, handler: __TI_decompress_none
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                                   
+-------   ----                                   
+20000124  BUFFER_MEMORY_START_COUNT              
+000024a9  C$$EXIT                                
+00002521  CPU_basepriGet                         
+00002513  CPU_basepriSet                         
+000024ed  CPU_cpsid                              
+00002503  CPU_cpsie                              
+000024f9  CPU_primask                            
+0000250f  CPU_wfi                                
+00001197  FlashCtl_clearInterruptFlag            
+00001057  FlashCtl_clearProgramVerification      
+0000116d  FlashCtl_disableInterrupt              
+000006bd  FlashCtl_disableReadBuffering          
+000010c1  FlashCtl_disableWordProgramming        
+00001159  FlashCtl_enableInterrupt               
+00000669  FlashCtl_enableReadBuffering           
+00001091  FlashCtl_enableWordProgramming         
+00000ce9  FlashCtl_eraseSector                   
+00001187  FlashCtl_getEnabledInterruptStatus     
+00001181  FlashCtl_getInterruptStatus            
+000002eb  FlashCtl_getMemoryInfo                 
+00000b4d  FlashCtl_getReadMode                   
+00001127  FlashCtl_getWaitState                  
+00000b77  FlashCtl_initiateMassErase             
+00000e11  FlashCtl_initiateSectorErase           
+000007ed  FlashCtl_isSectorProtected             
+000010cd  FlashCtl_isWordProgrammingEnabled      
+00000b9d  FlashCtl_performMassErase              
+00000eb1  FlashCtl_programMemory                 
+0000078d  FlashCtl_protectSector                 
+000011ab  FlashCtl_registerInterrupt             
+0000101d  FlashCtl_setProgramVerification        
+00000ae1  FlashCtl_setReadMode                   
+000010e9  FlashCtl_setWaitState                  
+0000071d  FlashCtl_unprotectSector               
+000011bf  FlashCtl_unregisterInterrupt           
+00000879  FlashCtl_verifyMemory                  
+000018ab  Interrupt_disableInterrupt             
+000016fb  Interrupt_disableMaster                
+00001aa9  Interrupt_disableSleepOnIsrExit        
+00001839  Interrupt_enableInterrupt              
+000016eb  Interrupt_enableMaster                 
+00001a97  Interrupt_enableSleepOnIsrExit         
+00001813  Interrupt_getPriority                  
+0000178b  Interrupt_getPriorityGrouping          
+00001a77  Interrupt_getPriorityMask              
+00001a91  Interrupt_getVectorTableAddress        
+0000191d  Interrupt_isEnabled                    
+000019a9  Interrupt_pendInterrupt                
+0000170b  Interrupt_registerInterrupt            
+000017c3  Interrupt_setPriority                  
+00001771  Interrupt_setPriorityGrouping          
+00001a67  Interrupt_setPriorityMask              
+00001a81  Interrupt_setVectorTableAddress        
+00001a19  Interrupt_unpendInterrupt              
+0000175d  Interrupt_unregisterInterrupt          
+UNDEFED   SHT$$INIT_ARRAY$$Base                  
+UNDEFED   SHT$$INIT_ARRAY$$Limit                 
+00002013  SysCtl_disableGlitchFilter             
+00001ea3  SysCtl_disableNMISource                
+00001fab  SysCtl_disablePeripheralAtCPUHalt      
+00001eed  SysCtl_disableSRAMBank                 
+00001f71  SysCtl_disableSRAMBankRetention        
+00002007  SysCtl_enableGlitchFilter              
+00001eb7  SysCtl_enableNMISource                 
+00001f97  SysCtl_enablePeripheralAtCPUHalt       
+00001ed1  SysCtl_enableSRAMBank                  
+00001f55  SysCtl_enableSRAMBankRetention         
+00001e9d  SysCtl_getFlashSize                    
+00001ecb  SysCtl_getNMISourceStatus              
+00001e97  SysCtl_getSRAMSize                     
+00001e21  SysCtl_getTLVInfo                      
+0000201f  SysCtl_getTempCalibrationConstant      
+00001f8d  SysCtl_rebootDevice                    
+00001fe3  SysCtl_setWDTPasswordViolationResetType
+00001fbf  SysCtl_setWDTTimeoutResetType          
+20000140  SystemCoreClock                        
+00001ad9  SystemCoreClockUpdate                  
+00001d4d  SystemInit                             
+4000480c  WDTCTL_SYM                             
+000015c3  __FlashCtl_remaskBurstDataPost         
+000014a9  __FlashCtl_remaskBurstDataPre          
+000012ed  __FlashCtl_remaskData32Post            
+000013d1  __FlashCtl_remaskData32Pre             
+000011cf  __FlashCtl_remaskData8Post             
+0000124f  __FlashCtl_remaskData8Pre              
+20010000  __STACK_END                            
+00000200  __STACK_SIZE                           
+00002698  __TI_CINIT_Base                        
+000026a8  __TI_CINIT_Limit                       
+00002684  __TI_Handler_Table_Base                
+00002690  __TI_Handler_Table_Limit               
+00002335  __TI_auto_init                         
+20000134  __TI_cleanup_ptr                       
+0000256b  __TI_decompress_none                   
+00002585  __TI_decompress_rle24                  
+20000138  __TI_dtors_ptr                         
+00000000  __TI_static_base__                     
+00002579  __TI_zero_init                         
+000022b9  __aeabi_memclr                         
+000022b9  __aeabi_memclr4                        
+000022b9  __aeabi_memclr8                        
+0000221d  __aeabi_memcpy                         
+0000221d  __aeabi_memcpy4                        
+0000221d  __aeabi_memcpy8                        
+000022bb  __aeabi_memset                         
+000022bb  __aeabi_memset4                        
+000022bb  __aeabi_memset8                        
+ffffffff  __binit__                              
+ffffffff  __c_args__                             
+2000fe00  __stack                                
+0000252d  _args_main                             
+0000240d  _c_int00                               
+2000012c  _lock                                  
+00002553  _nop                                   
+0000254b  _register_lock                         
+00002545  _register_unlock                       
+0000258b  _system_pre_init                       
+20000130  _unlock                                
+000024ad  abort                                  
+ffffffff  binit                                  
+0000245d  copy_in                                
+000020ad  delay_1sec                             
+000024b5  exit                                   
+20000000  g_pfnRAMVectors                        
+00000000  interruptVectors                       
+000020d3  main                                   
+2000013c  main_func_sp                           
+0000221d  memcpy                                 
+000022c1  memset                                 
+00002065  port_init                              
+20000128  sectorcount                            
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                                   
+-------   ----                                   
+00000000  __TI_static_base__                     
+00000000  interruptVectors                       
+00000200  __STACK_SIZE                           
+000002eb  FlashCtl_getMemoryInfo                 
+00000669  FlashCtl_enableReadBuffering           
+000006bd  FlashCtl_disableReadBuffering          
+0000071d  FlashCtl_unprotectSector               
+0000078d  FlashCtl_protectSector                 
+000007ed  FlashCtl_isSectorProtected             
+00000879  FlashCtl_verifyMemory                  
+00000ae1  FlashCtl_setReadMode                   
+00000b4d  FlashCtl_getReadMode                   
+00000b77  FlashCtl_initiateMassErase             
+00000b9d  FlashCtl_performMassErase              
+00000ce9  FlashCtl_eraseSector                   
+00000e11  FlashCtl_initiateSectorErase           
+00000eb1  FlashCtl_programMemory                 
+0000101d  FlashCtl_setProgramVerification        
+00001057  FlashCtl_clearProgramVerification      
+00001091  FlashCtl_enableWordProgramming         
+000010c1  FlashCtl_disableWordProgramming        
+000010cd  FlashCtl_isWordProgrammingEnabled      
+000010e9  FlashCtl_setWaitState                  
+00001127  FlashCtl_getWaitState                  
+00001159  FlashCtl_enableInterrupt               
+0000116d  FlashCtl_disableInterrupt              
+00001181  FlashCtl_getInterruptStatus            
+00001187  FlashCtl_getEnabledInterruptStatus     
+00001197  FlashCtl_clearInterruptFlag            
+000011ab  FlashCtl_registerInterrupt             
+000011bf  FlashCtl_unregisterInterrupt           
+000011cf  __FlashCtl_remaskData8Post             
+0000124f  __FlashCtl_remaskData8Pre              
+000012ed  __FlashCtl_remaskData32Post            
+000013d1  __FlashCtl_remaskData32Pre             
+000014a9  __FlashCtl_remaskBurstDataPre          
+000015c3  __FlashCtl_remaskBurstDataPost         
+000016eb  Interrupt_enableMaster                 
+000016fb  Interrupt_disableMaster                
+0000170b  Interrupt_registerInterrupt            
+0000175d  Interrupt_unregisterInterrupt          
+00001771  Interrupt_setPriorityGrouping          
+0000178b  Interrupt_getPriorityGrouping          
+000017c3  Interrupt_setPriority                  
+00001813  Interrupt_getPriority                  
+00001839  Interrupt_enableInterrupt              
+000018ab  Interrupt_disableInterrupt             
+0000191d  Interrupt_isEnabled                    
+000019a9  Interrupt_pendInterrupt                
+00001a19  Interrupt_unpendInterrupt              
+00001a67  Interrupt_setPriorityMask              
+00001a77  Interrupt_getPriorityMask              
+00001a81  Interrupt_setVectorTableAddress        
+00001a91  Interrupt_getVectorTableAddress        
+00001a97  Interrupt_enableSleepOnIsrExit         
+00001aa9  Interrupt_disableSleepOnIsrExit        
+00001ad9  SystemCoreClockUpdate                  
+00001d4d  SystemInit                             
+00001e21  SysCtl_getTLVInfo                      
+00001e97  SysCtl_getSRAMSize                     
+00001e9d  SysCtl_getFlashSize                    
+00001ea3  SysCtl_disableNMISource                
+00001eb7  SysCtl_enableNMISource                 
+00001ecb  SysCtl_getNMISourceStatus              
+00001ed1  SysCtl_enableSRAMBank                  
+00001eed  SysCtl_disableSRAMBank                 
+00001f55  SysCtl_enableSRAMBankRetention         
+00001f71  SysCtl_disableSRAMBankRetention        
+00001f8d  SysCtl_rebootDevice                    
+00001f97  SysCtl_enablePeripheralAtCPUHalt       
+00001fab  SysCtl_disablePeripheralAtCPUHalt      
+00001fbf  SysCtl_setWDTTimeoutResetType          
+00001fe3  SysCtl_setWDTPasswordViolationResetType
+00002007  SysCtl_enableGlitchFilter              
+00002013  SysCtl_disableGlitchFilter             
+0000201f  SysCtl_getTempCalibrationConstant      
+00002065  port_init                              
+000020ad  delay_1sec                             
+000020d3  main                                   
+0000221d  __aeabi_memcpy                         
+0000221d  __aeabi_memcpy4                        
+0000221d  __aeabi_memcpy8                        
+0000221d  memcpy                                 
+000022b9  __aeabi_memclr                         
+000022b9  __aeabi_memclr4                        
+000022b9  __aeabi_memclr8                        
+000022bb  __aeabi_memset                         
+000022bb  __aeabi_memset4                        
+000022bb  __aeabi_memset8                        
+000022c1  memset                                 
+00002335  __TI_auto_init                         
+0000240d  _c_int00                               
+0000245d  copy_in                                
+000024a9  C$$EXIT                                
+000024ad  abort                                  
+000024b5  exit                                   
+000024ed  CPU_cpsid                              
+000024f9  CPU_primask                            
+00002503  CPU_cpsie                              
+0000250f  CPU_wfi                                
+00002513  CPU_basepriSet                         
+00002521  CPU_basepriGet                         
+0000252d  _args_main                             
+00002545  _register_unlock                       
+0000254b  _register_lock                         
+00002553  _nop                                   
+0000256b  __TI_decompress_none                   
+00002579  __TI_zero_init                         
+00002585  __TI_decompress_rle24                  
+0000258b  _system_pre_init                       
+00002684  __TI_Handler_Table_Base                
+00002690  __TI_Handler_Table_Limit               
+00002698  __TI_CINIT_Base                        
+000026a8  __TI_CINIT_Limit                       
+20000000  g_pfnRAMVectors                        
+20000124  BUFFER_MEMORY_START_COUNT              
+20000128  sectorcount                            
+2000012c  _lock                                  
+20000130  _unlock                                
+20000134  __TI_cleanup_ptr                       
+20000138  __TI_dtors_ptr                         
+2000013c  main_func_sp                           
+20000140  SystemCoreClock                        
+2000fe00  __stack                                
+20010000  __STACK_END                            
+4000480c  WDTCTL_SYM                             
+ffffffff  __binit__                              
+ffffffff  __c_args__                             
+ffffffff  binit                                  
+UNDEFED   SHT$$INIT_ARRAY$$Base                  
+UNDEFED   SHT$$INIT_ARRAY$$Limit                 
+
+[131 symbols]
